@@ -1,0 +1,42 @@
+<div *ngIf="heroe.length > 0; else noHeroe">
+    <div *ngFor="let heros of heroe" class="card">
+        <h1>{{ heros.name | uppercase }}<small> ({{heros.aparicion | date: 'y'}}) </small></h1>
+        <hr>
+
+        <div class="row animated fadeIn fast">
+            <div class="col-md-4">
+                <img [src]="heros.img" class="img-fluid" alt="heros.nombre">
+                <br><br>
+                <a [routerLink]="['/home']" class="btn btn-outline-danger btn-block">Regresar</a>
+            </div>
+            <div class="col-md-8">
+                <h3>{{heros.nombre}}</h3>
+                <hr>
+                <p>
+                    {{heros.bio}}
+                </p>
+                <!-- <div *ngIf="heroes.casa === 'Marvel'; else dc">
+                    <img src="/assets/img/marvel.png" alt="">
+                </div>
+                <div *ngIf="heroes.casa === 'DC'">
+                    <img src="/assets/img/dc.png" alt="">
+                </div>
+                <ng-template #dc>
+                    <img src="/assets/img/dc.png" alt="">
+                </ng-template> -->
+
+                <div [ngSwitch]="heros.casa">
+                    <img *ngSwitchCase="'Marvel'" src="/assets/img/marvel.png" alt="Marvel">
+                    <img *ngSwitchCase="'DC'" src="/assets/img/dc.png" alt="DC">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #noHeroe>
+    <h3>No se encuentra ningun heroe con el nombre escrito</h3>
+    <img src="/assets/img/sad.jpg" style="width: 180px; height: 180px;" alt="sad">
+    <div class="col-md-8">
+        <button class="btn btn-outline-danger" (click)="regresar()">Regresar</button>
+    </div>
+</ng-template>

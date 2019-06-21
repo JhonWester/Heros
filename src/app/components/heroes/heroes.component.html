@@ -1,0 +1,31 @@
+<h1>{{ heroes.name | uppercase }}<small> ({{heroes.aparicion | date: 'y'}}) </small></h1>
+<hr>
+
+<div class="row animated fadeIn fast">
+    <div class="col-md-4">
+        <img [src]="heroes.img" class="img-fluid" alt="heroes.nombre">
+        <br><br>
+        <a [routerLink]="['/hero']" class="btn btn-outline-danger btn-block">Regresar</a>
+    </div>
+    <div class="col-md-8">
+        <h3>{{heroes.nombre}}</h3>
+        <hr>
+        <p>
+            {{heroes.bio}}
+        </p>
+        <!-- <div *ngIf="heroes.casa === 'Marvel'; else dc">
+            <img src="/assets/img/marvel.png" alt="">
+        </div>
+        <div *ngIf="heroes.casa === 'DC'">
+            <img src="/assets/img/dc.png" alt="">
+        </div>
+        <ng-template #dc>
+            <img src="/assets/img/dc.png" alt="">
+        </ng-template> -->
+
+        <div [ngSwitch]="heroes.casa">
+            <img *ngSwitchCase="'Marvel'" src="/assets/img/marvel.png" alt="Marvel">
+            <img *ngSwitchCase="'DC'" src="/assets/img/dc.png" alt="DC">
+        </div>
+    </div>
+</div>
